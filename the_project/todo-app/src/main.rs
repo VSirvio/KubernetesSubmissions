@@ -1,4 +1,4 @@
-use axum::{routing::get, Router};
+use axum::{routing::get, response::{Html, IntoResponse, Response}, Router};
 use std::env;
 use tokio::net::TcpListener;
 use tokio::signal::{self, unix::{SignalKind, signal}};
@@ -9,7 +9,7 @@ async fn main() {
 	let addr = format!("0.0.0.0:{}", port);
 	let listener = TcpListener::bind(addr).await.unwrap();
 
-	let app = Router::new().route("/test", get(test_route));
+	let app = Router::new().route("/", get(test_route));
 
 	println!("Server started in port {}", port);
 	axum::serve(listener, app)
@@ -38,6 +38,6 @@ async fn shutdown_signal() {
 	}
 }
 
-async fn test_route() -> &'static str {
-	"Hello world!\n"
+async fn test_route() -> Response {
+	Html("<h1>Hello world!</h1>").into_response()
 }
