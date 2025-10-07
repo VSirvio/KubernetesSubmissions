@@ -14,4 +14,4 @@ spec:
     spec:
       containers:
         - name: log-output
-          image: vsirvio/log_output
+          image: vsirvio/log_output:94fc7401ce401a5e4cd1ddbdc8fe78ba8fc934892faceadaa4964bfaf1ec9de2
