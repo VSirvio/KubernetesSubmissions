@@ -1,14 +1,8 @@
-FROM gcc:15 AS build-stage
+FROM node:22-alpine
 
-WORKDIR /build
+COPY package.json .
+RUN npm install
 
-COPY main.cpp .
+COPY index.js .
 
-RUN g++ -std=c++20 -static -o log_output main.cpp
-
-
-FROM scratch
-
-COPY --from=build-stage /build/log_output /
-
-CMD ["/log_output"]
+CMD node index.js
