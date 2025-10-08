@@ -12,6 +12,17 @@ spec:
       labels:
         app: log-output
     spec:
+      volumes:
+        - name: shared-log
+          emptyDir: {}
       containers:
-        - name: log-output
-          image: vsirvio/log_output:94fc7401ce401a5e4cd1ddbdc8fe78ba8fc934892faceadaa4964bfaf1ec9de2
+        - name: log-writer-app
+          image: vsirvio/log-writer-app:a834cba7768ad240a8e513b4af4cba8fc7d98f9dadd509037e2075996d6b3eed
+          volumeMounts:
+          - name: shared-log
+            mountPath: /usr/src/app/files
+        - name: http-endpoint-app
+          image: vsirvio/http-endpoint-app:aeac3cfd3bde58cc68d318227f6e97997395bdac68efd04d613da3ac000020c1
+          volumeMounts:
+          - name: shared-log
+            mountPath: /usr/src/app/files
