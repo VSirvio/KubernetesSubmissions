@@ -8,8 +8,10 @@ const app = express()
 
 app.get('/', async (req, res) => {
   try {
-    const fileData = await fs.readFile('/usr/src/app/files/logfile', 'utf8')
-    res.send(fileData)
+    const statusMessage = await fs.readFile('/usr/src/app/files/logfile', 'utf8')
+    const pongNumber = await fs.readFile('/usr/src/app/pongs-dir/pongs', 'utf8')
+    res.set('Content-Type', 'text/plain')
+    res.send(`${statusMessage}\nPing / Pongs: ${pongNumber}`)
   } catch (err) {
     console.error(`File I/O failed: ${err}`)
     res.sendStatus(500)
