@@ -14,4 +14,4 @@ spec:
     spec:
       containers:
         - name: ping-pong
-          image: vsirvio/ping-pong:c72a2d9ea6c8181f467ec954cd6de5510baaf11790c90c5665459ead56a522b5
+          image: vsirvio/ping-pong:d82264933d3575e921325702bdbfadd13288ce54d5a46b8855ef26a5657acfb0
