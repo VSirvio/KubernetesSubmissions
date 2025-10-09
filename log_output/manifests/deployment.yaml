@@ -17,7 +17,7 @@ spec:
           emptyDir: {}
       containers:
         - name: log-writer-app
-          image: vsirvio/log-writer-app:a834cba7768ad240a8e513b4af4cba8fc7d98f9dadd509037e2075996d6b3eed
+          image: vsirvio/log-writer-app:8646a51cfdad7051a327f83aacfdf9f3d8b619305b5d956230f4ac11ee3808da
           volumeMounts:
           - name: shared-log
             mountPath: /usr/src/app/files

@@ -4,9 +4,11 @@ import { v4 as uuidv4 } from 'uuid'
 process.on('SIGINT', () => process.exit())
 process.on('SIGTERM', () => process.exit())
 
+const sleep = ms => new Promise(r => setTimeout(r, ms))
+
 const randomString = uuidv4()
 
-setInterval(async () => {
+while (true) {
   const statusMessage = `${new Date().toISOString()}: ${randomString}`
 
   console.log(statusMessage)
@@ -16,4 +18,6 @@ setInterval(async () => {
   } catch (err) {
     console.error(`File I/O failed: ${err}`)
   }
-}, 5000)
+
+  await sleep(5000)
+}
