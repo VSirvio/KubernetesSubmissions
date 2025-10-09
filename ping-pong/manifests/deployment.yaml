@@ -12,6 +12,13 @@ spec:
       labels:
         app: ping-pong
     spec:
+      volumes:
+        - name: shared-pongs
+          persistentVolumeClaim:
+            claimName: pongs-claim
       containers:
         - name: ping-pong
           image: vsirvio/ping-pong:d82264933d3575e921325702bdbfadd13288ce54d5a46b8855ef26a5657acfb0
+          volumeMounts:
+          - name: shared-pongs
+            mountPath: /usr/src/app/pongs-dir
