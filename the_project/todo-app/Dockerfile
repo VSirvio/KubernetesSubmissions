@@ -1,17 +1,8 @@
-FROM rust:1.87 AS build-stage
+FROM node:22-alpine
 
-WORKDIR /build
+COPY package.json .
+RUN npm install
 
-RUN rustup target add x86_64-unknown-linux-musl
+COPY index.js .
 
-COPY Cargo.toml Cargo.toml
-COPY src src
-
-RUN cargo install --path . --target x86_64-unknown-linux-musl
-
-
-FROM scratch
-
-COPY --from=build-stage /usr/local/cargo/bin/todo-app /todo-app
-
-CMD ["/todo-app"]
+CMD ["node", "index.js"]
