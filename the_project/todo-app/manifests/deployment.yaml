@@ -12,9 +12,16 @@ spec:
       labels:
         app: todo-app
     spec:
+      volumes:
+        - name: static-vol
+          persistentVolumeClaim:
+            claimName: todo-app-static-claim
       containers:
         - name: todo-app
           image: vsirvio/todo-app:ed33ed62f6dcd31f98b07bee0f65e6941616c39438d9ec9687af0f15ce5f3bb7
           env:
           - name: PORT
             value: "3000"
+          volumeMounts:
+          - name: static-vol
+            mountPath: /static
