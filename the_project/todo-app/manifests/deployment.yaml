@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: todo-app
-          image: vsirvio/todo-app:323593825ad630dcc23b4b6761b10074166753ab546e41aa297fc3871213639b
+          image: vsirvio/todo-app:ed33ed62f6dcd31f98b07bee0f65e6941616c39438d9ec9687af0f15ce5f3bb7
           env:
           - name: PORT
             value: "3000"
