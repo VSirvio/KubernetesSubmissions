@@ -9,7 +9,7 @@ const app = express()
 app.get('/', async (req, res) => {
   try {
     const statusMessage = await fs.readFile('/usr/src/app/files/logfile', 'utf8')
-    const pongNumber = await fs.readFile('/usr/src/app/pongs-dir/pongs', 'utf8')
+    const pongNumber = await (await fetch('http://ping-pong-svc:2345/pings')).text()
     res.set('Content-Type', 'text/plain')
     res.send(`${statusMessage}\nPing / Pongs: ${pongNumber}`)
   } catch (err) {

@@ -15,9 +15,6 @@ spec:
       volumes:
         - name: shared-log
           emptyDir: {}
-        - name: shared-pongs
-          persistentVolumeClaim:
-            claimName: pongs-claim
       containers:
         - name: log-writer-app
           image: vsirvio/log-writer-app:8646a51cfdad7051a327f83aacfdf9f3d8b619305b5d956230f4ac11ee3808da
@@ -29,5 +26,3 @@ spec:
           volumeMounts:
           - name: shared-log
             mountPath: /usr/src/app/files
-          - name: shared-pongs
-            mountPath: /usr/src/app/pongs-dir
