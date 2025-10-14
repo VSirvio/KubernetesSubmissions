@@ -22,7 +22,7 @@ spec:
           - name: shared-log
             mountPath: /usr/src/app/files
         - name: http-endpoint-app
-          image: vsirvio/http-endpoint-app:b87afc75f39c090e6937540cf28b632ac12786100b21e396997a116852a5c794
+          image: vsirvio/http-endpoint-app:59a05ba4602bdb163f01853495eb7e0cd4d1dd4b92c4185d7a3b6f1b258ca348
           volumeMounts:
           - name: shared-log
             mountPath: /usr/src/app/files
