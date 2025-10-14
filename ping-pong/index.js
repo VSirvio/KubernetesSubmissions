@@ -12,6 +12,10 @@ app.get('/pingpong', (req, res) => {
   pongNumber++
 })
 
+app.get('/pings', (req, res) => {
+  res.send(pongNumber)
+})
+
 app.listen(3000, () => {
   console.log('Server running on port 3000')
 })
