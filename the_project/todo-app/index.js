@@ -32,7 +32,21 @@ app.get('/', async (req, res) => {
     await downloadFile('https://picsum.photos/256', 'static/image.jpg')
   }
 
-  res.send('<h1>The project App</h1><img src="image.jpg"><br><br><div>DevOps with Kubernetes 2025</div')
+  res.send(`
+<h1>The project App</h1>
+<img src="image.jpg">
+<br><br>
+<form>
+  <input type="text" maxlength="140">
+  <input type="button" value="Create todo">
+</form>
+<ul>
+  <li>Learn JavaScript</li>
+  <li>Learn React</li>
+  <li>Build a project</li>
+</ul>
+<div>DevOps with Kubernetes 2025</div>
+  `)
 })
 
 app.listen(PORT, () => {
