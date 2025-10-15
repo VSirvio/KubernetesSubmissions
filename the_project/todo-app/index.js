@@ -17,9 +17,9 @@ const downloadFile = async (from, to) => {
 
 const app = express()
 
-app.use(express.static('static'))
+app.use(express.static('public'))
 
-app.get('/', async (req, res) => {
+app.use(async (req, res, next) => {
   let fileStat = null
   let errored = false
   try {
@@ -32,22 +32,10 @@ app.get('/', async (req, res) => {
     await downloadFile('https://picsum.photos/256', 'static/image.jpg')
   }
 
-  res.send(`
-<h1>The project App</h1>
-<img src="image.jpg">
-<br><br>
-<form>
-  <input type="text" maxlength="140">
-  <input type="button" value="Create todo">
-</form>
-<ul>
-  <li>Learn JavaScript</li>
-  <li>Learn React</li>
-  <li>Build a project</li>
-</ul>
-<div>DevOps with Kubernetes 2025</div>
-  `)
+  next()
 })
+
+app.use(express.static('static'))
 
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`)

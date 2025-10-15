@@ -18,10 +18,10 @@ spec:
             claimName: todo-app-static-claim
       containers:
         - name: todo-app
-          image: vsirvio/todo-app:c533f2533838b4b17086d5450d8295c3d17fe247c23a61abe4326e631324b155
+          image: vsirvio/todo-app:523f84a10115e46a7dbcd82ddc28b378105166a45a82f8f0c9bf572d6837240a
           env:
           - name: PORT
             value: "3000"
           volumeMounts:
           - name: static-vol
-            mountPath: /static
+            mountPath: /app/static
