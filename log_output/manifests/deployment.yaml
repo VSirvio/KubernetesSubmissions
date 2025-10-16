@@ -16,6 +16,12 @@ spec:
       volumes:
         - name: shared-log
           emptyDir: {}
+        - name: config-vol
+          configMap:
+            name: log-output-configmap
+            items:
+            - key: information.txt
+              path: information.txt
       containers:
         - name: log-writer-app
           image: vsirvio/log-writer-app:8646a51cfdad7051a327f83aacfdf9f3d8b619305b5d956230f4ac11ee3808da
@@ -27,3 +33,6 @@ spec:
           volumeMounts:
           - name: shared-log
             mountPath: /usr/src/app/files
+          - name: config-vol
+            mountPath: /usr/src/app/config
+            readOnly: true
