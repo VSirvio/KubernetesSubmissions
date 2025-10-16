@@ -15,7 +15,9 @@ spec:
     spec:
       containers:
         - name: ping-pong
-          image: vsirvio/ping-pong:06c5c4842fa4eecade67320438888eec97f9c7c46c467406e288789b0eb0b65b
+          image: vsirvio/ping-pong:0c4a175d759a6594fe1dca1687a25e893834f39736d86a9927f5934f77499077
           env:
           - name: PORT
             value: "3000"
+          - name: DATABASE_URL
+            value: "postgres://postgres:postgres@ping-pong-postgres-svc"
