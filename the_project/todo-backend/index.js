@@ -1,6 +1,7 @@
 import express from 'express'
 
-const PORT = process.env.PORT || '3000'
+const PORT = process.env.PORT
+const TODOS_PATH = process.env.TODOS_PATH
 
 process.on('SIGINT', () => process.exit())
 process.on('SIGTERM', () => process.exit())
@@ -11,11 +12,11 @@ const app = express()
 
 app.use(express.json())
 
-app.get('/api/todos', (req, res) => {
+app.get(TODOS_PATH, (req, res) => {
   res.json(todos)
 })
 
-app.post('/api/todos', (req, res) => {
+app.post(TODOS_PATH, (req, res) => {
   const newTodo = req.body
   todos.push(newTodo)
   res.status(201).json(newTodo)
