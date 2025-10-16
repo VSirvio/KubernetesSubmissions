@@ -1,5 +1,7 @@
 import express from 'express'
 
+const PORT = process.env.PORT
+
 process.on('SIGINT', () => process.exit())
 process.on('SIGTERM', () => process.exit())
 
@@ -16,6 +18,6 @@ app.get('/pings', (req, res) => {
   res.send(pongNumber)
 })
 
-app.listen(3000, () => {
-  console.log('Server running on port 3000')
+app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`)
 })
