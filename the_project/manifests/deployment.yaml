@@ -19,10 +19,20 @@ spec:
             claimName: todo-app-static-claim
       containers:
         - name: todo-app
-          image: vsirvio/todo-app:523f84a10115e46a7dbcd82ddc28b378105166a45a82f8f0c9bf572d6837240a
+          image: vsirvio/todo-app:b44130510520e9114aeac4fb92ab379a7005423a2806879694a550caf1d85836
           env:
           - name: PORT
             value: "3000"
+          - name: FRONTEND_ROOT_DIR
+            value: "public"
+          - name: RANDOM_PICTURE_URL
+            value: "https://picsum.photos/256"
+          - name: PICTURE_SAVE_DIR
+            value: "static"
+          - name: PICTURE_FILE_NAME
+            value: "image.jpg"
+          - name: PICTURE_CHANGE_TIME_IN_MINUTES
+            value: "10"
           volumeMounts:
           - name: static-vol
             mountPath: /app/static
