@@ -30,6 +30,12 @@ spec:
             mountPath: /usr/src/app/files
         - name: http-endpoint-app
           image: vsirvio/http-endpoint-app:59a05ba4602bdb163f01853495eb7e0cd4d1dd4b92c4185d7a3b6f1b258ca348
+          env:
+            - name: MESSAGE
+              valueFrom:
+                configMapKeyRef:
+                  name: log-output-configmap
+                  key: MESSAGE
           volumeMounts:
           - name: shared-log
             mountPath: /usr/src/app/files
