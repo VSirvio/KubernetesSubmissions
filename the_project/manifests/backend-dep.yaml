@@ -15,9 +15,16 @@ spec:
     spec:
       containers:
         - name: todo-backend
-          image: vsirvio/todo-backend:3ce61102b34439886f511e1f0af1578e6535cba6665ba9c78d4ee58eb7ff121b
+          image: vsirvio/todo-backend:d3833cc5f3e59823aba9e43dce27e3721ffcb163e3352b8f5c31d57e82032dee
           env:
           - name: PORT
             value: "3000"
           - name: TODOS_PATH
             value: "/api/todos"
+          - name: POSTGRES_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: todo-backend-postgres-secret
+                key: POSTGRES_PASSWORD
+          - name: DATABASE_URL
+            value: "postgres://postgres:$(POSTGRES_PASSWORD)@todo-backend-postgres-svc"
