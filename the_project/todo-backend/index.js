@@ -33,6 +33,22 @@ app.get(TODOS_PATH, async (req, res) => {
 
 app.post(TODOS_PATH, async (req, res) => {
   const newTodo = req.body
+
+  if (typeof newTodo !== 'object') {
+    res.status(400).send('Request body should be a JSON object')
+    return
+  }
+
+  if (typeof newTodo.task !== 'string') {
+    res.status(400).send('Request body should contain a "task" property of type "string"')
+    return
+  }
+
+  if (newTodo.task.length > 140) {
+    res.status(400).send('Task should not contain more than 140 characters')
+    return
+  }
+
   const createdTodo = await Todo.create(newTodo)
   res.status(201).json(createdTodo)
 })
