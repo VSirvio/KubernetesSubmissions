@@ -1,4 +1,5 @@
 import express from 'express'
+import morgan from 'morgan'
 import { DataTypes, Model, Sequelize } from 'sequelize'
 
 const PORT = process.env.PORT
@@ -20,7 +21,10 @@ await sequelize.sync()
 
 const app = express()
 
+morgan.token('body', (req, res) => JSON.stringify(req.body))
+
 app.use(express.json())
+app.use(morgan(':method :url :status :res[content-length] - :response-time ms :body'))
 
 app.get(TODOS_PATH, async (req, res) => {
   const todos = await Todo.findAll()
