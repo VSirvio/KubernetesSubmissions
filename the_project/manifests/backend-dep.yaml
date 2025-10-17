@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
         - name: todo-backend
-          image: vsirvio/todo-backend:d3833cc5f3e59823aba9e43dce27e3721ffcb163e3352b8f5c31d57e82032dee
+          image: vsirvio/todo-backend:c7108e96f85ed48d707cefb8db841b571f265a5b21c7a9fb3eb3fec958473250
           env:
           - name: PORT
             value: "3000"
