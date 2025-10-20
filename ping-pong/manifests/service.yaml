@@ -3,11 +3,13 @@ kind: Service
 metadata:
   namespace: exercises
   name: ping-pong-svc
+  annotations:
+    cloud.google.com/network-tier: Standard
 spec:
-  type: ClusterIP
+  type: LoadBalancer
   selector:
     app: ping-pong
   ports:
-    - port: 2345
+    - port: 80
       protocol: TCP
       targetPort: 3000
