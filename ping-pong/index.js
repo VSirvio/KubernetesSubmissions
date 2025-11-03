@@ -27,11 +27,7 @@ const fetchPongNumber = async () => {
 
 const app = express()
 
-app.get('/', (req, res) => {
-  res.send('ping-pong root endpoint')
-})
-
-app.get('/pingpong', async (req, res) => {
+app.get('/', async (req, res) => {
   const pongNumber = await fetchPongNumber()
   await PongNumber.update({ pongNumber: pongNumber + 1 }, { where: {} })
   res.send(`pong ${pongNumber}`)
