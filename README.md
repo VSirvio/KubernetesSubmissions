@@ -36,3 +36,4 @@
 - [3.1](https://github.com/VSirvio/KubernetesSubmissions/tree/3.1/ping-pong)
 - [3.2](https://github.com/VSirvio/KubernetesSubmissions/tree/3.2/log_output)
 - [3.3](https://github.com/VSirvio/KubernetesSubmissions/tree/3.3/log_output)
+- [3.4](https://github.com/VSirvio/KubernetesSubmissions/tree/3.4/ping-pong)
