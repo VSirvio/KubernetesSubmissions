@@ -42,12 +42,13 @@ spec:
           volumeMounts:
             - name: todo-backend-postgres-vol
               mountPath: /var/lib/postgresql/data
+              subPath: postgres
   volumeClaimTemplates:
     - metadata:
         name: todo-backend-postgres-vol
       spec:
         accessModes: ["ReadWriteOnce"]
-        storageClassName: local-path
+        storageClassName: standard
         resources:
           requests:
             storage: 100Mi
