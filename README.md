@@ -39,3 +39,4 @@
 - [3.4](https://github.com/VSirvio/KubernetesSubmissions/tree/3.4/ping-pong)
 - [3.5](https://github.com/VSirvio/KubernetesSubmissions/tree/3.5/the_project)
 - [3.6](https://github.com/VSirvio/KubernetesSubmissions/tree/3.6/the_project)
+- [3.7](https://github.com/VSirvio/KubernetesSubmissions/tree/3.7/the_project)
