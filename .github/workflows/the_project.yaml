@@ -1,0 +1,67 @@
+name: Release the project application
+
+on:
+  push:
+    paths: ['the_project/**']
+
+env:
+  GKE_CLUSTER: dwk-cluster
+  GKE_ZONE: us-east1-d
+
+jobs:
+  build-publish-backend:
+    name: Build and publish backend
+    uses: ./.github/workflows/build-publish.yaml
+    with:
+      registry: 'us-east1-docker.pkg.dev'
+      image: 'todo-backend'
+      working-directory: './the_project/todo-backend'
+    secrets: inherit
+
+  build-publish-frontend:
+    name: Build and publish frontend
+    uses: ./.github/workflows/build-publish.yaml
+    with:
+      registry: 'us-east1-docker.pkg.dev'
+      image: 'todo-app'
+      working-directory: './the_project/todo-app'
+    secrets: inherit
+
+  deploy:
+    name: Deploy
+    needs: [build-publish-backend, build-publish-frontend]
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 'Checkout'
+        uses: actions/checkout@v4
+
+      - name: 'Authentication'
+        uses: google-github-actions/auth@v2
+        with:
+          credentials_json: '${{ secrets.GKE_SA_KEY }}'
+
+      - name: 'Get GKE credentials'
+        uses: 'google-github-actions/get-gke-credentials@v2'
+        with:
+          cluster_name: '${{ env.GKE_CLUSTER }}'
+          project_id: '${{ secrets.GKE_PROJECT }}'
+          location: '${{ env.GKE_ZONE }}'
+
+      - name: 'Set up Kustomize'
+        uses: imranismail/setup-kustomize@v2.1.0
+
+      - name: 'Deploy'
+        run: |-
+          kustomize edit set image PROJECT/IMAGE/BACKEND=$REPOSITORY/$BACKEND_IMAGE_TAG
+          kustomize edit set image PROJECT/IMAGE/FRONTEND=$REPOSITORY/$FRONTEND_IMAGE_TAG
+          kustomize build . | kubectl apply -f -
+          kubectl config set-context --current --namespace=project
+          kubectl rollout status deployment todo-backend-dep
+          kubectl rollout status deployment todo-app-dep
+          kubectl get services -o wide
+        working-directory: './the_project'
+        env:
+          REPOSITORY: '${{ secrets.CONTAINER_REPOSITORY_PATH }}'
+          BACKEND_IMAGE_TAG: '${{ needs.build-publish-backend.outputs.image-tag }}'
+          FRONTEND_IMAGE_TAG: '${{ needs.build-publish-frontend.outputs.image-tag }}'

@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
         - name: todo-backend
-          image: vsirvio/todo-backend:8d1675c924b7d92c30e52d8c2bad1b6f11f1d425452bb752c4ebd124005da3bc
+          image: PROJECT/IMAGE/BACKEND
           env:
           - name: PORT
             value: "3000"
@@ -28,3 +28,5 @@ spec:
                 key: POSTGRES_PASSWORD
           - name: DATABASE_URL
             value: "postgres://postgres:$(POSTGRES_PASSWORD)@todo-backend-postgres-svc"
+  strategy:
+    type: Recreate

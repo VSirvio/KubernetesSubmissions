@@ -1,5 +1,14 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
+
+images:
+- name: PROJECT/IMAGE/BACKEND
+  newName: vsirvio/todo-backend
+  newTag: 8d1675c924b7d92c30e52d8c2bad1b6f11f1d425452bb752c4ebd124005da3bc
+- name: PROJECT/IMAGE/FRONTEND
+  newName: vsirvio/todo-app
+  newTag: b44130510520e9114aeac4fb92ab379a7005423a2806879694a550caf1d85836
+
 resources:
 - manifests/backend-dep.yaml
 - manifests/backend-svc.yaml
