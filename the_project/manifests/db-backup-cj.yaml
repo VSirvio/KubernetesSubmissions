@@ -14,7 +14,7 @@ spec:
                 secretName: db-backup-gcloud-access-key
           containers:
           - name: todo-db-backup
-            image: google/cloud-sdk:stable
+            image: vsirvio/gcloud-with-postgres
             imagePullPolicy: IfNotPresent
             env:
             - name: POSTGRES_PASSWORD
