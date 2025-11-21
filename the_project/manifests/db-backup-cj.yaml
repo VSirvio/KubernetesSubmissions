@@ -1,0 +1,39 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: todo-db-backup-cj
+spec:
+  schedule: "*/5 * * * *"
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          volumes:
+            - name: gcloud-access-key
+              secret:
+                secretName: db-backup-gcloud-access-key
+          containers:
+          - name: todo-db-backup
+            image: google/cloud-sdk
+            imagePullPolicy: IfNotPresent
+            env:
+            - name: POSTGRES_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: todo-backend-postgres-secret
+                  key: POSTGRES_PASSWORD
+            - name: DATABASE_URL
+              value: "postgres://postgres:$(POSTGRES_PASSWORD)@todo-backend-postgres-svc"
+            command:
+            - /bin/bash
+            - -c
+            - >
+              gcloud auth login --cred-file=/etc/gcloud/access-key
+              TIMESTAMP=`date +%s`
+              pg_dump -v $DATABASE_URL > /usr/src/app/backup-$TIMESTAMP.sql
+              gcloud storage cp /usr/src/app/backup-$TIMESTAMP.sql gs://dwk-todo-db-backup
+            volumeMounts:
+            - name: gcloud-access-key
+              mountPath: /etc/gcloud
+              readOnly: true
+          restartPolicy: OnFailure
