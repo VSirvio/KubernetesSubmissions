@@ -29,7 +29,7 @@ spec:
     spec:
       containers:
         - name: todo-backend-postgres
-          image: postgres:17
+          image: postgres:15
           env:
           - name: POSTGRES_PASSWORD
             valueFrom:
