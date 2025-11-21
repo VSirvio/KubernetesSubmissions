@@ -12,6 +12,7 @@ images:
 resources:
 - manifests/backend-dep.yaml
 - manifests/backend-svc.yaml
+- manifests/db-backup-cj.yaml
 - manifests/deployment.yaml
 - manifests/ingress.yaml
 - manifests/persistentvolumeclaim.yaml
