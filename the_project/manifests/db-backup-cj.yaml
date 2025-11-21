@@ -14,7 +14,7 @@ spec:
                 secretName: db-backup-gcloud-access-key
           containers:
           - name: todo-db-backup
-            image: google/cloud-sdk
+            image: google/cloud-sdk:stable
             imagePullPolicy: IfNotPresent
             env:
             - name: POSTGRES_PASSWORD
@@ -30,8 +30,8 @@ spec:
             - >
               gcloud auth login --cred-file=/etc/gcloud/access-key &&
               TIMESTAMP=$(date +%s) &&
-              pg_dump -v $DATABASE_URL > /usr/src/app/backup-$TIMESTAMP.sql &&
-              gcloud storage cp /usr/src/app/backup-$TIMESTAMP.sql gs://dwk-todo-db-backup
+              pg_dump -v $DATABASE_URL > /backup-$TIMESTAMP.sql &&
+              gcloud storage cp /backup-$TIMESTAMP.sql gs://dwk-todo-db-backup
             volumeMounts:
             - name: gcloud-access-key
               mountPath: /etc/gcloud
