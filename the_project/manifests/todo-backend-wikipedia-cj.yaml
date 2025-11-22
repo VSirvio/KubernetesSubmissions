@@ -1,6 +1,7 @@
 apiVersion: batch/v1
 kind: CronJob
 metadata:
+  namespace: project
   name: todo-backend-wikipedia-cj
 spec:
   schedule: "@hourly"
