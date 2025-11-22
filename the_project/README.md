@@ -1,8 +1,31 @@
 ## The project
 
-Deploy with `kubectl apply -f manifests`
+### Deploying
 
-### Comparison between DBaaS and DIY
+1. Create `project` namespace with
+
+        kubectl create namespace project
+
+2. Create a Secret with the name `db-backup-gcloud-access-key` in Kubernetes. It should have in its data field `access-key` an access key for a GCP service account that has the `Storage Admin` IAM role set. (See the next section for details)
+3. Deploy with
+
+        kubectl apply -k .
+
+### Adding the service account access key for storing DB backups in the cloud
+
+Example commands for adding the service account are given below. (Remember to replace `github-actions@dwk-gke-331210.iam.gserviceaccount.com` with your own service account.)
+```bash
+$ gcloud iam service-accounts keys create ./db-backup-gcloud-access-key.json --iam-account=github-actions@dwk-gke-331210.iam.gserviceaccount.com
+$ echo "apiVersion: v1
+kind: Secret
+metadata:
+  name: db-backup-gcloud-access-key
+data:
+  access-key: $(cat db-backup-gcloud-access-key.json | base64 -w 0)" > db-backup-gcloud-access-key-secret.yaml
+$ kubectl apply -f db-backup-gcloud-access-key-secret.yaml --namespace=project
+```
+
+## Comparison between DBaaS and DIY
 
 - DBaaS: Google Cloud SQL
   - Service type: PostgreSQL
