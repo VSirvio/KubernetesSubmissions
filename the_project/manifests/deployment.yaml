@@ -36,5 +36,12 @@ spec:
           volumeMounts:
           - name: static-vol
             mountPath: /app/static
+          resources:
+            requests:
+              memory: "100Mi"
+              cpu: "150m"
+            limits:
+              memory: "300Mi"
+              cpu: "300m"
   strategy:
     type: Recreate

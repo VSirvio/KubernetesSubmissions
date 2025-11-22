@@ -28,5 +28,12 @@ spec:
                 key: POSTGRES_PASSWORD
           - name: DATABASE_URL
             value: "postgres://postgres:$(POSTGRES_PASSWORD)@todo-backend-postgres-svc"
+          resources:
+            requests:
+              memory: "100Mi"
+              cpu: "150m"
+            limits:
+              memory: "300Mi"
+              cpu: "300m"
   strategy:
     type: Recreate

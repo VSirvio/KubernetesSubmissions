@@ -25,4 +25,11 @@ spec:
               RANDOM_PAGE=$(wget -S $FETCH_URL 2>&1 | grep location | tail -c +13)
               && wget --header "Content-Type: application/json"
               --post-data '{"task":"Read '$RANDOM_PAGE'"}' $BACKEND_URL
+            resources:
+              requests:
+                memory: "100Mi"
+                cpu: "150m"
+              limits:
+                memory: "300Mi"
+                cpu: "300m"
           restartPolicy: OnFailure
