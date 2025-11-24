@@ -46,6 +46,10 @@ app.get('/pings', async (req, res) => {
   res.send(await fetchPongNumber())
 })
 
+app.get('/healthz', (req, res) => {
+  res.end()
+})
+
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`)
 })
