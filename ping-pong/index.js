@@ -9,6 +9,13 @@ process.on('SIGTERM', () => process.exit())
 
 const sequelize = new Sequelize(DATABASE_URL, { logging: false })
 
+try {
+  await sequelize.authenticate()
+} catch (err) {
+  console.error(`Unable to connect to the database: ${err}`)
+  process.exit(1)
+}
+
 class PongNumber extends Model {}
 PongNumber.init(
   { pongNumber: DataTypes.INTEGER },
@@ -16,6 +23,8 @@ PongNumber.init(
 )
 
 await sequelize.sync()
+
+console.log('Connection has been established successfully')
 
 const fetchPongNumber = async () => {
   let databaseEntries = await PongNumber.findAll()
