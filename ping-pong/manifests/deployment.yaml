@@ -21,3 +21,9 @@ spec:
             value: "3000"
           - name: DATABASE_URL
             value: "postgres://postgres:postgres@ping-pong-postgres-svc"
+          readinessProbe:
+            initialDelaySeconds: 10
+            periodSeconds: 5
+            httpGet:
+              path: /healthz
+              port: 3000
