@@ -17,8 +17,6 @@ Todo.init(
   { sequelize, modelName: 'Todo' }
 )
 
-await sequelize.sync()
-
 const app = express()
 
 morgan.token('body', (req, res) => JSON.stringify(req.body))
@@ -60,6 +58,7 @@ app.post(TODOS_PATH, async (req, res) => {
 app.get('/healthz', async (req, res) => {
   try {
     await sequelize.authenticate()
+    await sequelize.sync()
     res.end()
     return
   } catch {
