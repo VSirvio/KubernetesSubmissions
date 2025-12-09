@@ -39,6 +39,10 @@ Ping / Pongs: ${pongNumber}`)
   }
 })
 
+app.get('/healthz', (req, res) => {
+  res.end()
+})
+
 app.listen(3000, () => {
   console.log('Server running on port 3000')
 })
