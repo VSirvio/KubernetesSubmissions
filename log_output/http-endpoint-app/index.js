@@ -4,6 +4,21 @@ import fs from 'fs/promises'
 process.on('SIGINT', () => process.exit())
 process.on('SIGTERM', () => process.exit())
 
+try {
+  const pingResponse = await fetch('http://ping-pong-svc:2345/pings')
+  if (!pingResponse.ok) {
+    console.error(
+      'Unable to connect to the ping-pong app:',
+      pingResponse.status,
+      pingResponse.statusText,
+    )
+    process.exit(1)
+  }
+} catch (err) {
+  console.error(`Unable to connect to the ping-pong app: ${err}`)
+  process.exit(1)
+}
+
 const app = express()
 
 app.get('/', async (req, res) => {
