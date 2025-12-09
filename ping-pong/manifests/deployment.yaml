@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
         - name: ping-pong
-          image: vsirvio/ping-pong:d1e16761e1701bf342dc231f5366257a87966f94ddf6d9679cbdf4cc20121a6f
+          image: vsirvio/ping-pong:bf544f6bab44532b96605194bf8d01b4ea45de3a11342bbe1d2a228456876179
           env:
           - name: PORT
             value: "3000"
