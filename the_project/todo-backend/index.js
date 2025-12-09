@@ -57,7 +57,7 @@ app.post(TODOS_PATH, async (req, res) => {
   res.status(201).json(createdTodo)
 })
 
-app.get('/healthz', (req, res) => {
+app.get('/healthz', async (req, res) => {
   try {
     await sequelize.authenticate()
     res.end()
