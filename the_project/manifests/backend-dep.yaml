@@ -35,5 +35,11 @@ spec:
             limits:
               memory: "300Mi"
               cpu: "100m"
+          readinessProbe:
+            initialDelaySeconds: 10
+            periodSeconds: 5
+            httpGet:
+              path: /healthz
+              port: 3000
   strategy:
     type: Recreate
