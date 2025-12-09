@@ -27,7 +27,7 @@ spec:
                 name: todo-backend-postgres-secret
                 key: POSTGRES_PASSWORD
           - name: DATABASE_URL
-            value: "postgres://postgres:$(POSTGRES_PASSWORD)@incorrect-db-url"
+            value: "postgres://postgres:$(POSTGRES_PASSWORD)@todo-backend-postgres-svc"
           resources:
             requests:
               memory: "100Mi"
