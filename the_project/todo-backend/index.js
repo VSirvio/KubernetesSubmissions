@@ -57,6 +57,17 @@ app.post(TODOS_PATH, async (req, res) => {
   res.status(201).json(createdTodo)
 })
 
+app.get('/healthz', (req, res) => {
+  try {
+    await sequelize.authenticate()
+    res.end()
+    return
+  } catch {
+    res.status(500).end()
+    return
+  }
+})
+
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`)
 })
