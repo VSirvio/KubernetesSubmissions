@@ -4,10 +4,10 @@ kind: Kustomization
 images:
 - name: LOGHTTPIMG
   newName: vsirvio/http-endpoint-app
-  newTag: 684d391e38bb5eb8d660939527ddb9d5bfaf178c54f4e27d9681a64881fe557e
+  newTag: 7671278a9514393ac1c5b80dfc4c0e8e36f99e06
 - name: LOGWRITERIMG
   newName: vsirvio/log-writer-app
-  newTag: 8646a51cfdad7051a327f83aacfdf9f3d8b619305b5d956230f4ac11ee3808da
+  newTag: 7671278a9514393ac1c5b80dfc4c0e8e36f99e06
 
 resources:
 - manifests/configmap.yaml
