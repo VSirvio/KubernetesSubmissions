@@ -23,6 +23,15 @@ const App = () => {
     setNewTask('')
   }
 
+  const todoDone = id => async (event) => {
+    event.preventDefault()
+    await fetch(
+      `/api/todos/${id}`,
+      { method: 'PUT' },
+    )
+    setTodos(todos.map(todo => todo.id === id ? {...todo, done: true} : todo))
+  }
+
   return (
     <>
       <h1>The project App</h1>
@@ -36,8 +45,20 @@ const App = () => {
         />
         <button type="submit">Create todo</button>
       </form>
+      <h2>Todo</h2>
       <ul>
-        {todos.map(todo => <li>{todo.task}</li>)}
+        {todos.filter(todo => !todo.done).map(todo => (
+          <li>
+            {todo.task}
+            <form onSubmit={todoDone(todo.id)}>
+              <button type="submit">Mark as done</button>
+            </form>
+          </li>
+        ))}
+      </ul>
+      <h2>Done</h2>
+      <ul>
+        {todos.filter(todo => todo.done).map(todo => <li>{todo.task}</li>)}
       </ul>
       <div>DevOps with Kubernetes 2025</div>
     </>
