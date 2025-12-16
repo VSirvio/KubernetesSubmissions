@@ -1,0 +1,47 @@
+name: Build and publish log_output
+
+on:
+  push:
+    paths: ['log_output/**', '.github/workflows/**']
+
+jobs:
+  build-publish:
+    name: Build, Push, Release log_output
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Login to Docker Hub
+        uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+      - name: Build and publish http-endpoint-app
+        run: |-
+          docker build --tag "vsirvio/http-endpoint-app:$GITHUB_SHA" .
+          docker push "vsirvio/http-endpoint-app:$GITHUB_SHA"
+        working-directory: './log_output/http-endpoint-app'
+
+      - name: Build and publish log-writer-app
+        run: |-
+          docker build --tag "vsirvio/log-writer-app:$GITHUB_SHA" .
+          docker push "vsirvio/log-writer-app:$GITHUB_SHA"
+        working-directory: './log_output/log-writer-app'
+
+      - name: Set up Kustomize
+        uses: imranismail/setup-kustomize@v2
+
+      - name: Use right images
+        run: |-
+          kustomize edit set image LOGHTTPIMG=vsirvio/http-endpoint-app:$GITHUB_SHA
+          kustomize edit set image LOGWRITERIMG=vsirvio/log-writer-app:$GITHUB_SHA
+        working-directory: './log_output'
+
+      - name: commit kustomization.yaml to GitHub
+        uses: EndBug/add-and-commit@v9
+        with:
+          add: 'log_output/kustomization.yaml'
+          message: New version released ${{ github.sha }}
