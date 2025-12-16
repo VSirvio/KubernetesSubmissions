@@ -69,6 +69,7 @@ app.put(TODOS_PATH + '/:id', async (req, res) => {
       { done: true },
       { where: { id: id } },
     )
+    res.end()
 })
 
 app.get('/healthz', async (req, res) => {
