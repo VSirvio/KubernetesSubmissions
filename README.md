@@ -53,3 +53,4 @@
 - [4.3](https://github.com/VSirvio/KubernetesSubmissions/tree/4.3/prometheus)
 - [4.4](https://github.com/VSirvio/KubernetesSubmissions/tree/4.4/ping-pong)
 - [4.5](https://github.com/VSirvio/KubernetesSubmissions/tree/4.5/the_project)
+- [4.7](https://github.com/VSirvio/KubernetesSubmissions/tree/4.7/log_output)
