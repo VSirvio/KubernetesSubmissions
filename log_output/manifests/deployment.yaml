@@ -24,12 +24,12 @@ spec:
               path: information.txt
       containers:
         - name: log-writer-app
-          image: vsirvio/log-writer-app:8646a51cfdad7051a327f83aacfdf9f3d8b619305b5d956230f4ac11ee3808da
+          image: LOGWRITERIMG
           volumeMounts:
           - name: shared-log
             mountPath: /usr/src/app/files
         - name: http-endpoint-app
-          image: vsirvio/http-endpoint-app:684d391e38bb5eb8d660939527ddb9d5bfaf178c54f4e27d9681a64881fe557e
+          image: LOGHTTPIMG
           env:
             - name: MESSAGE
               valueFrom:
