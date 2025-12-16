@@ -11,7 +11,7 @@ const App = () => {
   const addTodo = async (event) => {
     event.preventDefault()
     const newTodo = { task: newTask }
-    await fetch(
+    const response = await fetch(
       '/api/todos',
       {
         method: 'post',
@@ -19,7 +19,8 @@ const App = () => {
         body: JSON.stringify(newTodo),
       },
     )
-    setTodos(todos.concat(newTodo))
+    const addedTodo = await response.json()
+    setTodos(todos.concat(addedTodo))
     setNewTask('')
   }
 
