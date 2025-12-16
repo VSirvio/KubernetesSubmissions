@@ -29,7 +29,7 @@ spec:
           - name: shared-log
             mountPath: /usr/src/app/files
         - name: http-endpoint-app
-          image: vsirvio/http-endpoint-app:e79275219dfd03a0e8fb5476af78776eebdc87ffa515d748b457e71d5f36d5b9
+          image: vsirvio/http-endpoint-app:6f95d4f6c2031240c2f5d7c18892c44412d4a245c45878047bd27e50d1257b34
           env:
             - name: MESSAGE
               valueFrom:
