@@ -13,8 +13,16 @@ const sequelize = new Sequelize(DATABASE_URL, { logging: false })
 
 class Todo extends Model {}
 Todo.init(
-  { task: DataTypes.STRING },
-  { sequelize, modelName: 'Todo' }
+  {
+    task: {
+      type: DataTypes.STRING,
+    },
+    done: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: false,
+    },
+  },
+  { sequelize, modelName: 'Todo' },
 )
 
 const app = express()
@@ -53,6 +61,14 @@ app.post(TODOS_PATH, async (req, res) => {
 
   const createdTodo = await Todo.create(newTodo)
   res.status(201).json(createdTodo)
+})
+
+app.put(TODOS_PATH + '/:id', async (req, res) => {
+    const id = req.params.id
+    await Todo.update(
+      { done: true },
+      { where: { id: id } },
+    )
 })
 
 app.get('/healthz', async (req, res) => {
