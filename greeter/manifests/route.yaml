@@ -9,7 +9,7 @@ spec:
     name: greeter-svc
     port: 80
   rules:
-    backendRefs:
+  - backendRefs:
     - name: greeter-svc-v1
       port: 80
       weight: 75

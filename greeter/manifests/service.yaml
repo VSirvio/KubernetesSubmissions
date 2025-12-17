@@ -8,6 +8,6 @@ metadata:
 spec:
   ports:
   - port: 80
-    protocol: http
+    protocol: TCP
   selector:
     app: greeter
