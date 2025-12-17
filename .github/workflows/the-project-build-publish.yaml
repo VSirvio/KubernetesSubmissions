@@ -5,7 +5,7 @@ on:
     paths: ['the_project/**', '.github/workflows/**']
 
 jobs:
-  build-publish:
+  build-publish-the-project:
     name: Build, Push, Release the_project
     runs-on: ubuntu-latest
 
@@ -30,18 +30,3 @@ jobs:
           docker build --tag "vsirvio/todo-app:$GITHUB_SHA" .
           docker push "vsirvio/todo-app:$GITHUB_SHA"
         working-directory: './the_project/todo-app'
-
-      - name: Set up Kustomize
-        uses: imranismail/setup-kustomize@v2
-
-      - name: Use right images
-        run: |-
-          kustomize edit set image PROJECT/IMAGE/BACKEND=vsirvio/todo-backend:$GITHUB_SHA
-          kustomize edit set image PROJECT/IMAGE/FRONTEND=vsirvio/todo-app:$GITHUB_SHA
-        working-directory: './the_project'
-
-      - name: commit kustomization.yaml to GitHub
-        uses: EndBug/add-and-commit@v9
-        with:
-          add: 'the_project/kustomization.yaml'
-          message: New todo-app version released ${{ github.sha }}
