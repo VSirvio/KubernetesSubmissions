@@ -57,3 +57,7 @@
 - [4.8](https://github.com/VSirvio/KubernetesSubmissions/tree/4.8/the_project)
 - [4.9](https://github.com/VSirvio/KubernetesSubmissions/tree/4.9/the_project)
 - [4.10](https://github.com/VSirvio/dwk-project-config/tree/4.10)
+
+### Chapter 6
+
+- [5.2](https://github.com/VSirvio/KubernetesSubmissions/tree/5.2/Istio)
