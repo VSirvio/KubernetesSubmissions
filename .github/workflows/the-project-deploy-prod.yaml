@@ -3,6 +3,7 @@ name: Deploy the_project to production
 on:
   push:
     tags: ['**']
+    paths: ['the_project/**']
 
 jobs:
   the-project-build-prod:
