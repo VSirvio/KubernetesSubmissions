@@ -2,7 +2,7 @@ name: Build and publish log_output
 
 on:
   push:
-    paths: ['log_output/**', '.github/workflows/**']
+    paths: ['log_output/**']
 
 jobs:
   build-publish-log-output:
@@ -30,3 +30,18 @@ jobs:
           docker build --tag "vsirvio/log-writer-app:$GITHUB_SHA" .
           docker push "vsirvio/log-writer-app:$GITHUB_SHA"
         working-directory: './log_output/log-writer-app'
+
+      - name: Set up Kustomize
+        uses: imranismail/setup-kustomize@v2
+
+      - name: Use right images
+        run: |-
+          kustomize edit set image LOGHTTPIMG=vsirvio/http-endpoint-app:$GITHUB_SHA
+          kustomize edit set image LOGWRITERIMG=vsirvio/log-writer-app:$GITHUB_SHA
+        working-directory: './log_output'
+
+      - name: commit kustomization.yaml to GitHub
+        uses: EndBug/add-and-commit@v9
+        with:
+          add: 'log_output/kustomization.yaml'
+          message: New log_output version released ${{ github.sha }}

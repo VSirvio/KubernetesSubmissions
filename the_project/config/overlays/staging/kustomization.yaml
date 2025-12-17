@@ -1,0 +1,17 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+namespace: staging
+
+resources:
+- ./../../base
+
+namePrefix: staging-
+
+images:
+- name: PROJECT/IMAGE/BACKEND
+  newName: vsirvio/todo-backend
+  newTag: 5fc10b49dcfa02adbdf566cb190647ad8fa855db
+- name: PROJECT/IMAGE/FRONTEND
+  newName: vsirvio/todo-app
+  newTag: 5fc10b49dcfa02adbdf566cb190647ad8fa855db
