@@ -22,7 +22,7 @@ jobs:
       - name: Build and publish todo-backend
         run: |-
           docker build --tag "vsirvio/todo-backend:$GITHUB_SHA" .
-          docker push "vsirvio/todo-backend$GITHUB_SHA"
+          docker push "vsirvio/todo-backend:$GITHUB_SHA"
         working-directory: './the_project/todo-backend'
 
       - name: Build and publish todo-app
