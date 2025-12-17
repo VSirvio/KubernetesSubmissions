@@ -12,12 +12,14 @@ app.get('/', async (req, res) => {
     const MESSAGE = process.env.MESSAGE || 'ERROR'
     const statusMessage = await fs.readFile('/usr/src/app/files/logfile', 'utf8')
     const pongNumber = await (await fetch('http://ping-pong-svc:2345/pings')).text()
+    const greeting = await (await fetch('http://greeter-svc')).text()
 
     res.set('Content-Type', 'text/plain')
     res.send(`file content: ${information}
 env variable: MESSAGE=${MESSAGE}
 ${statusMessage}
-Ping / Pongs: ${pongNumber}`)
+Ping / Pongs: ${pongNumber}
+greetings: ${greeting}`)
   } catch (err) {
     console.error(`File I/O failed: ${err}`)
     res.sendStatus(500)
