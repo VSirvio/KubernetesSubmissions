@@ -10,7 +10,7 @@ resources:
 images:
 - name: PROJECT/IMAGE/BACKEND
   newName: vsirvio/todo-backend
-  newTag: 1bb49f66f6a10529b16e892e37cff2a9097c2840
+  newTag: 30e75a33f6a0cd615f878d83ff559e17533b58b9
 - name: PROJECT/IMAGE/FRONTEND
   newName: vsirvio/todo-app
-  newTag: 1bb49f66f6a10529b16e892e37cff2a9097c2840
+  newTag: 30e75a33f6a0cd615f878d83ff559e17533b58b9
