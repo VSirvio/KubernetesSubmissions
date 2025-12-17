@@ -44,5 +44,5 @@ jobs:
         uses: EndBug/add-and-commit@v9
         with:
           add: 'the_project/config/overlays/production/kustomization.yaml'
-          push: 'origin main'
+          push: 'origin HEAD:main'
           message: New production version released ${{ github.sha }}
