@@ -6,8 +6,6 @@ namespace: staging
 resources:
 - ./../../base
 
-namePrefix: staging-
-
 images:
 - name: PROJECT/IMAGE/BACKEND
   newName: vsirvio/todo-backend

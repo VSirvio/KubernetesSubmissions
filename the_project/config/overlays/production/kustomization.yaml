@@ -7,8 +7,6 @@ resources:
 - ./../../base
 - db-backup-cj.yaml
 
-namePrefix: prod-
-
 images:
 - name: PROJECT/IMAGE/BACKEND
   newName: vsirvio/todo-backend
