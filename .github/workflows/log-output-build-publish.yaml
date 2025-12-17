@@ -2,6 +2,7 @@ name: Build and publish log_output
 
 on:
   push:
+    branches: ['main']
     paths: ['log_output/**']
 
 jobs:
