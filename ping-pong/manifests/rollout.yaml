@@ -1,7 +1,6 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Rollout
 metadata:
-  namespace: exercises
   name: ping-pong-dep
 spec:
   replicas: 1
