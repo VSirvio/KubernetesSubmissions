@@ -5,15 +5,13 @@ on:
     tags: ['**']
 
 jobs:
-  the-project-deploy-prod:
-    name: Deploy the_project to production
+  the-project-build-prod:
+    name: Build the_project production release
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-        with:
-          ref: 'main'
 
       - name: Login to Docker Hub
         uses: docker/login-action@v3
@@ -33,6 +31,18 @@ jobs:
           docker push "vsirvio/todo-app:$GITHUB_SHA"
         working-directory: './the_project/todo-app'
 
+  the-project-deploy-prod:
+    name: Deploy the_project to production
+    runs-on: ubuntu-latest
+    needs: the-project-build-prod
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          repository: 'VSirvio/dwk-project-config'
+          token: ${{ secrets.CONFIG_TOKEN }}
+
       - name: Set up Kustomize
         uses: imranismail/setup-kustomize@v2
 
@@ -40,11 +50,10 @@ jobs:
         run: |-
           kustomize edit set image PROJECT/IMAGE/BACKEND=vsirvio/todo-backend:$GITHUB_SHA
           kustomize edit set image PROJECT/IMAGE/FRONTEND=vsirvio/todo-app:$GITHUB_SHA
-        working-directory: './the_project/config/overlays/production'
+        working-directory: './overlays/production'
 
       - name: commit kustomization.yaml to GitHub
         uses: EndBug/add-and-commit@v9
         with:
-          add: 'the_project/config/overlays/production/kustomization.yaml'
-          pull: 'origin'
+          add: 'overlays/production/kustomization.yaml'
           message: New production version released ${{ github.sha }}
