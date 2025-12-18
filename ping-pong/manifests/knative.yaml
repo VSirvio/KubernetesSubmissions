@@ -1,0 +1,14 @@
+apiVersion: serving.knative.dev/v1
+kind: Service
+metadata:
+  name: ping-pong
+spec:
+  template:
+    spec:
+      containers:
+        - image: vsirvio/ping-pong:b6fcaa31cef277c460265bf1aa35c71fd9c782ae6594bae03b52ff03ca770dd9
+          ports:
+          - containerPort: 80
+          env:
+          - name: DATABASE_URL
+            value: "postgres://postgres:postgres@ping-pong-postgres-svc"
