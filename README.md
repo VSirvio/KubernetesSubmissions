@@ -63,3 +63,4 @@
 - [5.2](https://github.com/VSirvio/KubernetesSubmissions/tree/5.2/Istio)
 - [5.3](https://github.com/VSirvio/KubernetesSubmissions/tree/5.3/log_output)
 - [5.4](https://github.com/VSirvio/KubernetesSubmissions/tree/5.4/wikifetcher)
+- [5.6](https://github.com/VSirvio/KubernetesSubmissions/tree/5.6/knative)
